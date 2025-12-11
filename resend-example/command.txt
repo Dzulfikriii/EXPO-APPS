@@ -1,0 +1,8 @@
+1. npx expo install resend 
+2. npx expo install @react-email/render
+3. npx expo export -p web --clear
+4. eas deploy --prod
+
+
+
+tutorial link https://www.youtube.com/watch?v=8sPD8SNcUFA
