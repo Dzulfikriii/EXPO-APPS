@@ -1,0 +1,12 @@
+1. npx create-target
+2. select widget
+3. add appleTeamID under ios in app.json
+4. npx expo prebuild -p ios --clean
+5. copy the entitlements and add under ios in app.json
+6. npx expo prebuild -p ios --clean
+7. npx expo run:ios
+8. widget now available 
+9. xed ios <- to open the ios folder in xcode
+10. the source code would be under  expo:target > widget > widgets.swift
+
+tutorial link https://www.youtube.com/watch?v=UH4ejdz3fko
