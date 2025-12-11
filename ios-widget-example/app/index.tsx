@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, Text, TextInput, View, AppState } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExtensionStorage } from "@bacons/apple-targets";
 
 const storage = new ExtensionStorage(
@@ -12,12 +12,22 @@ const STORAGE_KEY = "widget_todos";
 interface Todo {
   id: string;
   title: string;
-  completed: boolean;
+  completed: string;
   createdAt: Date;
 }
 
 export default function Index() {
   const [todos, setTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    AppState.addEventListener("change", (status) => {
+      if (status === "background") {
+        console.log("background");
+        ExtensionStorage.reloadWidget();
+        console.log("reload widget");
+      }
+    });
+  }, []);
 
   const handleAddTodo = (title: string) => {
     const newTodos = [
@@ -29,14 +39,14 @@ export default function Index() {
         createdAt: new Date(),
       },
     ];
-    setTodos(newTodos);
+    setTodos(newTodos as Todo[]);
     storage.set(STORAGE_KEY, JSON.stringify(newTodos));
   };
 
   const handleDeleteTodo = (id: string) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
 
-    setTodos(newTodos);
+    setTodos(newTodos as Todo[]);
     storage.set(STORAGE_KEY, JSON.stringify(newTodos));
   };
 
@@ -44,9 +54,14 @@ export default function Index() {
     const newTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
-    setTodos(newTodos);
+    setTodos(newTodos as Todo[]);
     storage.set(STORAGE_KEY, JSON.stringify(newTodos));
   };
+
+  const clearWidgetData = () => {
+    storage.set(STORAGE_KEY, []);
+    setTodos([]);
+  }
 
   return (
     <>
