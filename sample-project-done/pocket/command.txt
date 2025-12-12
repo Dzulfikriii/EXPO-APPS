@@ -1,0 +1,18 @@
+1. npx expo install expo-dev-client
+2. npx expo prebuild --platform ios
+3. npx expo run:ios
+4. npm run reset-project
+5. npx expo install react-native-keyboard-controller
+6. npm install @clerk/clerk-expo expo-secure-store expo-auth-session
+7. npm install fast-xml-parser
+8. npm install drizzle-kit
+9. npm install drizzle-orm babel-plugin-inline-import
+10. npx expo install expo-crypto
+11. npx expo install expo-sqlite
+12. npx expo customize babel.config.js
+13. npx expo customize metro.config.js
+14. npx expo install expo-drizzle-studio-plugin
+15. 
+
+
+https://www.youtube.com/watch?v=GSs4Dnz274k
